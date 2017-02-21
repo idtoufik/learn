@@ -3,6 +3,7 @@ package fr.learn.member;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,5 +27,11 @@ public class MemberController {
 	public List<Member> getAllMembers()
 	{
 		return memberService.findAll();
+	}
+	
+	@RequestMapping(value = "/resources/members/{idMember}", method = RequestMethod.DELETE)
+	public void deleteMember(@PathVariable("idMember") long idMember)
+	{
+		memberService.delete(idMember);
 	}
 }

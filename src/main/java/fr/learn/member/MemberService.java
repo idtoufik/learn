@@ -44,4 +44,9 @@ public class MemberService {
 		 memberRepository.findAll().forEach(members::add);
 		 return members;
 	 }
+	 
+	 public void delete(long id)
+	 {
+		 memberRepository.delete(id);
+	 }
 }
