@@ -1,24 +1,23 @@
 package fr.learn.dao;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="lesson")
-public class Lesson {
+@Table(name="exercise")
+public class Exercise {
+	
 	private long id;
 	private String title;
-	private String content;
-	//private Course course;
-	private Set<Exercise> exercises;
-	
-	public Lesson() {
+	private String subject;
+	private Lesson lesson;
+	public Exercise() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	
 	@Id
@@ -35,21 +34,22 @@ public class Lesson {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getContent() {
-		return content;
+	public String getSubject() {
+		return subject;
 	}
-	public void setContent(String content) {
-		this.content = content;
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	@ManyToOne
+	public Lesson getLesson() {
+		return lesson;
+	}
+
+	public void setLesson(Lesson lesson) {
+		this.lesson = lesson;
 	}
 	
-	@OneToMany(mappedBy="lesson")
-	public Set<Exercise> getExercises() {
-		return exercises;
-	}
-	public void setExercises(Set<Exercise> exercises) {
-		this.exercises = exercises;
-	}
 	
-	
-	
+
 }
