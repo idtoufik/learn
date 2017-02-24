@@ -15,6 +15,8 @@ public class Exercise {
 	private String title;
 	private String subject;
 	private Lesson lesson;
+	
+	
 	public Exercise() {
 		super();
 		// TODO Auto-generated constructor stub

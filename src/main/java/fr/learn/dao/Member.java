@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -25,6 +26,7 @@ public class Member {
 	private String e_mail;
 	private String password;
 	private Set<Role> roles;
+	private Set<Course> courses;
 
 	public Member() {
 
@@ -86,4 +88,15 @@ public class Member {
 		this.roles = roles;
 	}
 
+	@OneToMany(mappedBy="member")
+	public Set<Course> getCourses() {
+		return courses;
+	}
+
+
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
+	}
+
+	
 }

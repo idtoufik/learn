@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -15,7 +16,7 @@ public class Lesson {
 	private long id;
 	private String title;
 	private String content;
-	//private Course course;
+	private Course course;
 	private Set<Exercise> exercises;
 	
 	public Lesson() {
@@ -48,6 +49,15 @@ public class Lesson {
 	}
 	public void setExercises(Set<Exercise> exercises) {
 		this.exercises = exercises;
+	}
+
+	@ManyToOne
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = course;
 	}
 	
 	
