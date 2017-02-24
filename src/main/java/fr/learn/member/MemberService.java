@@ -49,4 +49,40 @@ public class MemberService {
 	 {
 		 memberRepository.delete(id);
 	 }
+	 
+	 public Member getMember(long memberId)
+	 {
+		 return memberRepository.findOne(memberId);
+	 }
+	 
+	 public void updateMember(Member member)
+	 {
+		 memberRepository.save(member);
+	 }
+
+	public Member findOne(long idMember) {
+		return memberRepository.findOne(idMember);
+	}
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 }

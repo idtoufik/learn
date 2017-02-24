@@ -36,4 +36,19 @@ public class MemberController {
 	{
 		memberService.delete(idMember);
 	}
+	
+	
+	@RequestMapping(value = "/resources/members/{idMember}", method = RequestMethod.GET)
+	public Member getMember(@PathVariable("idMember") long idMember)
+	{
+		return memberService.getMember(idMember);
+	}
+	
+	@RequestMapping(value = "/resources/members/{idMember}", method = RequestMethod.PUT)
+	public void updateMember(@PathVariable("idMember") long idMember, @RequestBody Member member)
+	{
+		member.setId(idMember);
+		member.setPassword(memberService.findOne(idMember).getPassword());
+		memberService.updateMember(member);
+	}
 }
