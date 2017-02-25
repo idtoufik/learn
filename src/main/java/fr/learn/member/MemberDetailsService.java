@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import fr.learn.dao.Member;
-import fr.learn.dao.Role;
 
 @Service
 public class MemberDetailsService implements UserDetailsService{
