@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -64,10 +67,17 @@ public class MemberService {
 		return memberRepository.findOne(idMember);
 	}
 	 
-	 
-	 
-	 
-	 
+	public Member getMemberFromAuthentification(Authentication auth)
+	{
+	    if(auth != null && auth.isAuthenticated() && !(auth instanceof AnonymousAuthenticationToken))
+	    {
+	    	return findByPseudo(auth.getName());
+	    }
+	    else
+	    {
+	    	return null;
+	    }
+	}
 	 
 	 
 	 
