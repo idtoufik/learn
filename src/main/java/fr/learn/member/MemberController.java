@@ -24,7 +24,7 @@ public class MemberController {
 	@RequestMapping(value = "/resources/members", method = RequestMethod.POST)
 	public void registerMember(@RequestBody Member member)
 	{
-		member.setId(0);
+		member.setId(null);
 		member.setDateOfRegistration(new Date());
 		memberService.register(member);
 	}

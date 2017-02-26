@@ -27,7 +27,7 @@ public class LessonService {
      * @param Lesson lesson
      */
     public void addLesson(Lesson lesson) {
-    	lesson.setId(0);
+    	lesson.setId(null);
         lessonRepository.save(lesson);
     }
 
