@@ -25,6 +25,7 @@ public class CourseService {
 	}
 	
 	public void addCourse(Course course){
+		course.setId(null);
 		courseRepository.save(course);
 	}
 	

@@ -1,6 +1,7 @@
 
 package fr.learn.lesson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ public class LessonService {
      * @param Lesson lesson
      */
     public void addLesson(Lesson lesson) {
+    	lesson.setId(0);
         lessonRepository.save(lesson);
     }
 
@@ -54,7 +56,17 @@ public class LessonService {
      * 
      */
     public  List<Lesson> getAllLessons() {
-        return lessonRepository.findAll();
+    	List<Lesson> lessons = new ArrayList<>();
+    	lessonRepository.findAll().forEach(lessons::add);
+    	return lessons;
+    }
+    
+    public List<Lesson> getAllLessonsOfCourse(Long courseId)
+    {
+    	List<Lesson> lessons = new ArrayList<Lesson>();
+    	lessonRepository.findByCourseId(courseId).forEach(lessons::add);
+    	System.out.println("call function ofcourse : "+lessons.size());
+    	return lessons;
     }
 
 }

@@ -12,9 +12,18 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 @Entity
 @Table(name = "member")
+
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 public class Member {
 
 	
@@ -23,6 +32,7 @@ public class Member {
 	private String name;
 	private String firstName;
 	private Date date_of_birth;
+	private Date dateOfRegistration;
 	private String e_mail;
 	private String password;
 	private Set<Role> roles;
@@ -71,6 +81,7 @@ public class Member {
 	public void setE_mail(String e_mail) {
 		this.e_mail = e_mail;
 	}
+	@JsonProperty(access=Access.WRITE_ONLY)
 	public String getPassword() {
 		return password;
 	}
@@ -97,6 +108,17 @@ public class Member {
 	public void setCourses(Set<Course> courses) {
 		this.courses = courses;
 	}
+
+
+	public Date getDateOfRegistration() {
+		return dateOfRegistration;
+	}
+
+
+	public void setDateOfRegistration(Date dateOfRegistration) {
+		this.dateOfRegistration = dateOfRegistration;
+	}
+	
 
 	
 }

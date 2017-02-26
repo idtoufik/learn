@@ -1,12 +1,12 @@
 package fr.learn.member;
 
+import java.util.Date;
 import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,23 +24,25 @@ public class MemberController {
 	@RequestMapping(value = "/resources/members", method = RequestMethod.POST)
 	public void registerMember(@RequestBody Member member)
 	{
-		System.out.println(member.getFirstName());
+		member.setId(0);
+		member.setDateOfRegistration(new Date());
 		memberService.register(member);
 	}
 
 	@RequestMapping(value = "/resources/members", method = RequestMethod.GET)
 	public List<Member> getAllMembers()
 	{
+		
 		List<Member> members = memberService.findAll();
-		members.forEach(t -> t.setPassword(null));
 		return members;
 	}
 	
 	
-	//TODO only the superUser can drop users
+	
 	@RequestMapping(value = "/resources/members/{idMember}", method = RequestMethod.DELETE)
 	public void deleteMember(@PathVariable("idMember") long idMember)
 	{
+		//TODO only the superUser can drop users
 		memberService.delete(idMember);
 	}
 	
@@ -48,27 +50,27 @@ public class MemberController {
 	public Member getMember(@PathVariable("idMember") long idMember)
 	{
 		Member member = memberService.getMember(idMember);
-		member.setPassword(null);
 		return member;
 	}
 	
 	
-	//TODO mettre a jour user detailsService apres la mise a jour du model 
-	/*
-	 * 
-	 * Authentication auth = SecurityContextHolder.getContext().setAuthentication();
-	        if(auth.getPrincipal() != null)
-	        {
-	        	
-	        	UserDetails details = (UserDetails)auth.getPrincipal();
-	        	System.out.println(details.getUsername());
-	        	details.setUsername(details.getUsername() +"1");
-	        	
-	        }
-	 */
+	
 	@RequestMapping(value = "/resources/members/{idMember}", method = RequestMethod.PUT)
 	public void updateMember(@PathVariable("idMember") long idMember, @RequestBody Member member)
 	{
+		//TODO mettre a jour user detailsService apres la mise a jour du model 
+		/*
+		 * 
+		 * Authentication auth = SecurityContextHolder.getContext().setAuthentication();
+		        if(auth.getPrincipal() != null)
+		        {
+		        	
+		        	UserDetails details = (UserDetails)auth.getPrincipal();
+		        	System.out.println(details.getUsername());
+		        	details.setUsername(details.getUsername() +"1");
+		        	
+		        }
+		 */
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Member loggedIn = memberService.getMemberFromAuthentification(auth);

@@ -1,5 +1,6 @@
 package fr.learn.dao;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -10,14 +11,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 @Entity
 @Table(name="lesson")
+
+@JsonIdentityInfo(
+		  generator = ObjectIdGenerators.PropertyGenerator.class, 
+		  property = "id")
 public class Lesson {
 	private long id;
 	private String title;
 	private String content;
 	private Course course;
 	private Set<Exercise> exercises;
+	private Date dateOfCreation;
 	
 	public Lesson() {
 	}
@@ -44,6 +54,7 @@ public class Lesson {
 	}
 	
 	@OneToMany(mappedBy="lesson")
+	@JsonIgnore
 	public Set<Exercise> getExercises() {
 		return exercises;
 	}
@@ -58,6 +69,14 @@ public class Lesson {
 
 	public void setCourse(Course course) {
 		this.course = course;
+	}
+
+	public Date getDateOfCreation() {
+		return dateOfCreation;
+	}
+
+	public void setDateOfCreation(Date dateOfCreation) {
+		this.dateOfCreation = dateOfCreation;
 	}
 	
 	
