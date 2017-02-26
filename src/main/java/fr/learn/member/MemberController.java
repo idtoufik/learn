@@ -56,7 +56,7 @@ public class MemberController {
 	
 	
 	@RequestMapping(value = "/resources/members/{idMember}", method = RequestMethod.PUT)
-	public void updateMember(@PathVariable("idMember") long idMember, @RequestBody Member member)
+	public void updateMember(@PathVariable("idMember") Long idMember, @RequestBody Member member)
 	{
 		//TODO mettre a jour user detailsService apres la mise a jour du model 
 		/*
@@ -74,7 +74,7 @@ public class MemberController {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Member loggedIn = memberService.getMemberFromAuthentification(auth);
-		if(loggedIn != null && loggedIn.getId() == idMember)
+		if(loggedIn != null && loggedIn.getId().equals(idMember))
 		{
 			member.setId(idMember);
 			member.setPassword(memberService.findOne(idMember).getPassword());

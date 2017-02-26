@@ -43,7 +43,7 @@ public class LessonController {
 
     @RequestMapping(value="/resources/courses/{idCourse}/lessons/{idLesson}", 
     		method=RequestMethod.GET)
-    public Lesson getLesson(@PathVariable long idLesson) {
+    public Lesson getLesson(@PathVariable Long idLesson) {
         return lessonService.getLesson(idLesson);
     }
 
@@ -55,7 +55,7 @@ public class LessonController {
     }
     
     @RequestMapping(value="/resources/courses/{idCourse}/lessons/", method=RequestMethod.POST)
-    public  boolean addLesson(@PathVariable long idCourse, @RequestBody Lesson lesson) {
+    public  boolean addLesson(@PathVariable Long idCourse, @RequestBody Lesson lesson) {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Member loggedIn = memberService.getMemberFromAuthentification(auth);
 		
@@ -66,7 +66,7 @@ public class LessonController {
 		if(course == null)
 			return false;
 		
-		if(loggedIn.getId() == course.getMember().getId())
+		if(loggedIn.getId().equals(course.getMember().getId()))
 		{
 			lesson.setCourse(course);
 			lesson.setDateOfCreation(new Date());
@@ -80,7 +80,7 @@ public class LessonController {
   
     
     @RequestMapping(value="/resources/courses/{idCourse}/lessons/{idLesson}", method=RequestMethod.DELETE)
-    public  boolean deleteLesson(@PathVariable long idLesson) {
+    public  boolean deleteLesson(@PathVariable Long idLesson) {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Member loggedIn = memberService.getMemberFromAuthentification(auth);
 		
@@ -90,7 +90,7 @@ public class LessonController {
 		if(lesson == null)
 			return false;
 		
-		if(lesson.getCourse().getMember().getId() == loggedIn.getId())
+		if(lesson.getCourse().getMember().getId().equals(loggedIn.getId()))
 		{
 			lessonService.deleteLesson(idLesson);
 			return true;
@@ -100,7 +100,7 @@ public class LessonController {
     }
 
     @RequestMapping(value="/resources/courses/{idCourse}/lessons/{idLesson}", method=RequestMethod.PUT)
-    public  boolean updateLesson(@PathVariable long idLesson,@RequestBody  Lesson lesson) {
+    public  boolean updateLesson(@PathVariable Long idLesson,@RequestBody  Lesson lesson) {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Member loggedIn = memberService.getMemberFromAuthentification(auth);
 		
@@ -110,7 +110,7 @@ public class LessonController {
 		if(oldLesson == null)
 			return false;
 		
-		if(oldLesson.getCourse().getMember().getId() == loggedIn.getId())
+		if(oldLesson.getCourse().getMember().getId().equals(loggedIn.getId()))
 		{
 			lesson.setId(idLesson);
 			lesson.setCourse(oldLesson.getCourse());

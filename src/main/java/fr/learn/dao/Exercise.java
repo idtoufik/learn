@@ -18,8 +18,7 @@ public class Exercise {
 	
 	
 	public Exercise() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 	
 	@Id

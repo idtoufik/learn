@@ -31,7 +31,7 @@ public class CourseController {
 	}
 	
 	@RequestMapping(value="/resources/courses/{idCourse}", method = RequestMethod.GET)
-	public  Course getCourse(@PathVariable("idCourse") long id){
+	public  Course getCourse(@PathVariable("idCourse") Long id){
 		return courseService.findById(id);
 	}
 	
@@ -49,7 +49,7 @@ public class CourseController {
 	}
 	
 	@RequestMapping(value="/resources/courses/{idCourse}", method = RequestMethod.PUT)
-	public Boolean modifyCourses(@RequestBody Course course, @PathVariable("idCourse") long id){
+	public Boolean modifyCourses(@RequestBody Course course, @PathVariable("idCourse") Long id){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Member loggedIn = memberService.getMemberFromAuthentification(auth);
 		if(loggedIn == null)
@@ -58,7 +58,7 @@ public class CourseController {
 		Course oldCourse = courseService.findById(id);
 		if(oldCourse == null)
 			return false;
-		if(loggedIn.getId() == oldCourse.getMember().getId())
+		if(loggedIn.getId().equals(oldCourse.getMember().getId()))
 		{
 			course.setId(id);
 			course.setDateOfCreation(oldCourse.getDateOfCreation());
@@ -71,7 +71,7 @@ public class CourseController {
 	}
 
 	@RequestMapping(value="/resources/courses/{idCourse}", method = RequestMethod.DELETE)
-	public boolean deleteCourse(@PathVariable("idCourse") long id){
+	public boolean deleteCourse(@PathVariable("idCourse") Long id){
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Member loggedIn = memberService.getMemberFromAuthentification(auth);
 		if(loggedIn == null)
@@ -81,7 +81,7 @@ public class CourseController {
 		if(course == null)
 			return false;
 		
-		if(loggedIn.getId() == course.getMember().getId())
+		if(loggedIn.getId().equals(course.getMember().getId()))
 		{
 			courseService.deleteCourse(id);
 			return true;
