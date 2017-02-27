@@ -54,7 +54,6 @@ public class Lesson {
 	}
 	
 	@OneToMany(mappedBy="lesson")
-	@JsonIgnore
 	public Set<Exercise> getExercises() {
 		return exercises;
 	}

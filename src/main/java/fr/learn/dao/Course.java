@@ -3,6 +3,7 @@ package fr.learn.dao;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,10 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
+
 
 @Entity
 @Table(name = "course")
@@ -29,6 +33,8 @@ public class Course {
 	private Member member;
 	private Set<Lesson> lessons;
 	private Date dateOfCreation;
+	private byte[] image;
+	//private String b64img;
 	
 	
 	public Course(){
@@ -91,6 +97,18 @@ public class Course {
 	public void setDateOfCreation(Date dateOfCreation) {
 		this.dateOfCreation = dateOfCreation;
 	}
+	
+	@Column(length = 20971520)
+	public byte[] getImage() {
+		return image;
+	}
+	
+	
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	
 	
 	
 	

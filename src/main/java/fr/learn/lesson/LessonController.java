@@ -47,14 +47,22 @@ public class LessonController {
         return lessonService.getLesson(idLesson);
     }
 
-    @RequestMapping(value="/resources/courses/{idCourse}/lessons/", 
+    @RequestMapping(value="/resources/courses/{idCourse}/lessons", 
     		method=RequestMethod.GET)
     public  List<Lesson> getAllLessonsOfCourse(@PathVariable Long idCourse) {
     	
-    	return lessonService.getAllLessonsOfCourse(idCourse);
+    	List<Lesson> lessons = lessonService.getAllLessonsOfCourse(idCourse);
+    	for(Lesson lesson: lessons)
+    	{
+    		lesson.getCourse().getMember().setCourses(null);
+    		lesson.getCourse().getMember().setRoles(null);
+    		lesson.getCourse().setLessons(null);
+
+    	}
+    	return lessons;
     }
     
-    @RequestMapping(value="/resources/courses/{idCourse}/lessons/", method=RequestMethod.POST)
+    @RequestMapping(value="/resources/courses/{idCourse}/lessons", method=RequestMethod.POST)
     public  boolean addLesson(@PathVariable Long idCourse, @RequestBody Lesson lesson) {
     	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		Member loggedIn = memberService.getMemberFromAuthentification(auth);

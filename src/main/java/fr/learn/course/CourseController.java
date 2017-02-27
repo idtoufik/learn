@@ -27,7 +27,16 @@ public class CourseController {
 	
 	@RequestMapping(value="/resources/courses", method = RequestMethod.GET )
 	public List<Course> getAllCourses(){
+		List<Course> courses = courseService.findAll();
+		
+		for(Course course : courses)
+		{
+			course.getMember().setCourses(null);
+			course.getMember().setRoles(null);
+			course.setLessons(null);
+		}
 		return courseService.findAll();
+		
 	}
 	
 	@RequestMapping(value="/resources/courses/{idCourse}", method = RequestMethod.GET)

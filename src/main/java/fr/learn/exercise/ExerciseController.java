@@ -34,7 +34,12 @@ public class ExerciseController {
 			method=RequestMethod.GET)
 	public List<Exercise> getAllExercisesOfLesson(@PathVariable Long idLesson)
 	{
-		return exerciseService.getAllExercisesOfLesson(idLesson);
+		List<Exercise> exercises =  exerciseService.getAllExercisesOfLesson(idLesson);
+		for(Exercise exo: exercises){
+			exo.getLesson().setCourse(null);
+			exo.getLesson().setExercises(null);
+		}
+		return exercises;
 	}
 	
 	@RequestMapping(value="/resources/courses/{idCourse}/lessons/{idLesson}/exercises/{idExercise}",
@@ -83,7 +88,7 @@ public class ExerciseController {
 		if(loggedIn.getId().equals(oldExercise.getLesson().getCourse().getMember().getId()))
 		{
 			exercise.setId(idExercise);
-			exercise.setLesson(exercise.getLesson());
+			exercise.setLesson(oldExercise.getLesson());
 			exerciseService.updateExercise(exercise);
 			return true;
 		}

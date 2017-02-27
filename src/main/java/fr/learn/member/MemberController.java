@@ -34,6 +34,7 @@ public class MemberController {
 	{
 		
 		List<Member> members = memberService.findAll();
+		members.forEach(t -> t.setCourses(null));
 		return members;
 	}
 	
