@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Acceuil</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style/style.css">
+    <script src="style/jquery-3.1.1.js"></script>
+    <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
+    <script src="style/bootstrap/js/bootstrap.min.js"></script>
+    <script src="style/angular.min.js"></script>
+
+  </head>
+<!--- ________________________________ -->
+  <body>
+    <script>
+    $(function(){
+      $("#navbar").load("navbar.html", function(){
+        $("#tuto").addClass("active");
+      });
+    });
+    </script>
+    <div id="navbar"></div>
+    <br>
+
+
+    <!-- Service Panels -->
+        <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
+        <div class="container">
+
+          <!-- Image Header -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <img class="img-responsive" src="http://placehold.it/1200x300" alt="">
+                </div>
+            </div>
+
+            <h2 class="page-header">Services Panels</h2>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                      <span class="fa-stack fa-5x">
+                        <img src="/Users/chelalimohamed-tayeb/Pictures/lenna.png" style="height: 140px;"/>
+                      </span>
+                    </div>
+                    <div class="panel-body">
+                        <h4>Cours 1</h4>
+                        <p>Vien apprendre des choses au lieux de perdre ton temps.</p>
+                        <a href="#" class="btn btn-primary">Learn More</a>
+                    </div>
+                </div>
+            </div>
+            <!-- ________________________-this is as test of AngularJS __________________________ -->
+            <div class="row" ng-app="app" ng-controller="AppCtrl as app">
+                <div class="col-md-3 col-sm-6"  ng-repeat="c in app.sujet">
+                    <div class="panel panel-default text-center" >
+                        <div class="panel-heading">
+                          <span class="fa-stack fa-5x">
+                            <img src="/Users/chelalimohamed-tayeb/Pictures/lenna.png" style="height: 140px;"/ >
+                          </span>
+                        </div>
+                        <div class="panel-body" >
+                            <h4>{{c.subject}}</h4>
+                            <p>{{c.description}}</p>
+                            <a href="#" class="btn btn-primary">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                var app = angular.module('app', []);
+                
+                app.controller('AppCtrl', function($http) {
+                    var app = this;
+                    $http.get("http://192.168.43.170:8080/resources/courses")
+                        .then( function(data) {
+                            app.sujet = data;
+                        });
+                });
+            </script>
+            <!-- ________________________end of test __________________________ -->
+            <div class="row"></div>
+
+            <hr>
+            <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Copyright &copy; Your Website 2017</p>
+                    </div>
+                </div>
+            </footer>
+
+          </div>
+
+  </body>
+</html>
