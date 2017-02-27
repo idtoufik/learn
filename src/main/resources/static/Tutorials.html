@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
     <script src="style/bootstrap/js/bootstrap.min.js"></script>
     <script src="style/angular.min.js"></script>
-
+	<script src="js/tutorial.js"> </script>
   </head>
 <!--- ________________________________ -->
-  <body>
+  <body ng-app="app">
     <script>
     $(function(){
       $("#navbar").load("navbar.html", function(){
@@ -51,7 +51,7 @@
                 </div>
             </div>
             <!-- ________________________-this is as test of AngularJS __________________________ -->
-            <div class="row" ng-app="app" ng-controller="AppCtrl as app">
+            <div class="row"  ng-controller="AppCtrl as app">
                 <div class="col-md-3 col-sm-6"  ng-repeat="c in app.sujet">
                     <div class="panel panel-default text-center" >
                         <div class="panel-heading">
@@ -68,8 +68,7 @@
                     </div>
                 </div>
             </div>
-            <script src="js/tutorial.js">	
-            </script>
+            
             <!-- ________________________end of test __________________________ -->
             <div class="row"></div>
 
