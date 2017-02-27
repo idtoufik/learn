@@ -81,8 +81,20 @@ public class MemberController {
 			member.setPassword(memberService.findOne(idMember).getPassword());
 			memberService.updateMember(member);
 		}
+		
+		
 	}
 
+	@RequestMapping(value = "/resources/members/loggedIn", method = RequestMethod.GET)
+	public Member getLoggedInMember()
+	{
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		Member loggedIn = memberService.getMemberFromAuthentification(auth);
+		if(loggedIn != null)
+			loggedIn.setCourses(null);
+		
+		return loggedIn;
+	}
 	
 	
 	

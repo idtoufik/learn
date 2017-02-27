@@ -56,27 +56,19 @@
                     <div class="panel panel-default text-center" >
                         <div class="panel-heading">
                           <span class="fa-stack fa-5x">
-                            <img src="/Users/chelalimohamed-tayeb/Pictures/lenna.png" style="height: 140px;"/ >
+                            <img src="data:image/png;base64, {{c.image}}" style="height: 140px;"/ >
                           </span>
                         </div>
                         <div class="panel-body" >
                             <h4>{{c.subject}}</h4>
                             <p>{{c.description}}</p>
+                     
                             <a href="#" class="btn btn-primary">Learn More</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <script>
-                var app = angular.module('app', []);
-                
-                app.controller('AppCtrl', function($http) {
-                    var app = this;
-                    $http.get("http://192.168.43.170:8080/resources/courses")
-                        .then( function(data) {
-                            app.sujet = data;
-                        });
-                });
+            <script src="js/tutorial.js">	
             </script>
             <!-- ________________________end of test __________________________ -->
             <div class="row"></div>
