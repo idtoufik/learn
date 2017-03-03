@@ -98,7 +98,7 @@
 						if ($scope.register.$valid) {
 							$http.post("/resources/members", $scope.member)
 									.then(function() {
-										console.log("avec success")
+										window.location = "/login"
 									})
 						}
 					}
