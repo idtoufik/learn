@@ -10,80 +10,99 @@
 <script src="style/bootstrap/js/bootstrap.min.js"></script>
 <script src="style/angular.min.js"></script>
 <script src="js/global.js"></script>
+<script src="style/validator.min.js"></script>
 
 </head>
 
 <body ng-app="App">
 
-	<div class="login" >
+	<div class="login">
 		<div class="login-screen">
 			<div class="app-title">
 				<h1>Register form :</h1>
 			</div>
 
-			<div class="login-form" ng-controller="registerCtrl">
-			
-				<div class="control-group">
+			<form class="login-form" ng-controller="registerCtrl"
+				data-toggle="validator" role="form" name="register">
+
+				<div class="form-group control-group">
 					<input type="text" class="login-field" value=""
-						placeholder="first name" id="firstName" ng-model="member.firstName"> <label
-						class="login-field-icon fui-user" for="login-name"></label>
-				</div>
-				
-			
-				<div class="control-group">
-					<input type="text" class="login-field" value=""
-						placeholder="username" id="name" ng-model="member.name"> <label
-						class="login-field-icon fui-user" for="login-name"></label>
-				</div>
-				
-				<div class="control-group">
-					<input type="text" class="login-field" value=""
-						placeholder="pseudo" id="pseudo" ng-model="member.pseudo"> <label
-						class="login-field-icon fui-user" for="login-name"></label>
+						placeholder="Prénom" id="firstName" ng-model="member.firstName"
+						data-error="le nom doit au moins contenir 2 caractaires"
+						pattern="[A-Za-z]{2,}" required> <label
+						class="login-field-icon fui-user " for="login-name"></label>
+					<div class="help-block with-errors"></div>
 				</div>
 
-				<div class="control-group">
+
+				<div class="form-group control-group">
+					<input type="text" class="login-field" placeholder="nom" id="name"
+						ng-model="member.name" pattern="[A-Za-z]{2,}"
+						data-error="le nom doit au moins contenir 2 caractaires" required>
+					<label class="login-field-icon fui-user" for="login-name"></label>
+					<div class="help-block with-errors"></div>
+				</div>
+
+				<div class="form-group control-group">
 					<input type="text" class="login-field" value=""
-						placeholder="mail@mail.com" id="email" ng-model="member.e_mail"> <label
+						placeholder="pseudo" id="pseudo" ng-model="member.pseudo"
+						data-error="[A-Za-z][A-Za-z1-9]{3,}"
+						pattern="[A-Za-z][A-Za-z1-9]{3,}"> <label
+						class="login-field-icon fui-user" for="login-name"></label>
+					<div class="help-block with-errors"></div>
+				</div>
+
+				<div class="form-group control-group">
+					<input type="email" class="login-field" value=""
+						placeholder="mail@mail.com" id="email" ng-model="member.e_mail"
+						data-error="erreur"> <label
 						class="login-field-icon fui-user" for="email"></label>
+					<div class="help-block with-errors"></div>
 				</div>
 
-				<div class="control-group">
+				<div class="form-group control-group">
 					<input type="password" class="login-field" value=""
-						placeholder="password" id="login-pass" ng-model="member.password"> <label
+						placeholder="password" id="login-pass" ng-model="member.password"
+						data-error="[A-Za-z][A-Za-z1-9]{3,}" data-minlength="6"> <label
 						class="login-field-icon fui-lock" for="login-pass"></label>
+					<div class="help-block with-errors"></div>
 				</div>
 
-				<div class="control-group">
-					<input type="text" class="login-field" value=""
-						placeholder="Confirm password" id="login-pass2"> <label
+				<div class="form-group control-group">
+					<input type="password" class="login-field" value=""
+						placeholder="Confirm password" id="login-pass2"
+						data-match="#login-pass" data-match-error="don't match"> <label
 						class="login-field-icon fui-user" for="login-pass2"></label>
-				</div>
-				
-				<div class="control-group">
-					<input type="text" class="login-field" value=""
-						placeholder="Date of birth : yyyy-mm-jj" id="dateBirth" ng-model="member.date_of_birth"> <label
-						class="login-field-icon fui-user" for="login-pass2"></label>
+					<div class="help-block with-errors"></div>
 				</div>
 
-				<input class="btn btn-primary btn-large btn-block"  type="submit" vlaue="Register" ng-click="clicked()"/>
-			</div>
-		</div>
-	</div>
-	<script type="text/javascript">
-		var app = angular.module('App', []);
-		app.controller("registerCtrl", function($scope, $http) {
-			$scope.member = {}
+				<div class="form-group control-group">
+					<input type="date" class="login-field" value=""
+						placeholder="Date of birth : yyyy-mm-jj" id="dateBirth"
+						ng-model="member.date_of_birth"> <label
+						class="login-field-icon fui-user" for="dateBirth"></label>
+				</div>
 
-			$scope.clicked = function() {
-				console.log($scope.member)
-				$http.post("/resources/members", $scope.member)
-				.then( function(){
-					console.log("avec success")
-				})
-			}
-		});
-	</script>
+				<div class="form-group">
+					<input class="btn btn-primary btn-large btn-block" type="submit"
+						value="Register" ng-click="clicked()" />
+					<div></div>
+				</div>
+			</form>
+			<script type="text/javascript">
+				var app = angular.module('App', []);
+				app.controller("registerCtrl", function($scope, $http) {
+					$scope.member = {}
 
+					$scope.clicked = function() {
+						if ($scope.register.$valid) {
+							$http.post("/resources/members", $scope.member)
+									.then(function() {
+										console.log("avec success")
+									})
+						}
+					}
+				});
+			</script>
 </body>
 </html>

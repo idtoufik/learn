@@ -11,6 +11,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -51,6 +53,8 @@ public class Member {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	//@Pattern(regexp="[A-Za-z][A-Za-z1-9]{3,}")
+	//@NotNull
 	public String getPseudo() {
 		return pseudo;
 	}
