@@ -25,7 +25,7 @@ app.controller("controller", function($scope){
 	
 });
 
-/*app.controller('user', function($scope, $http){
+app.controller('user', function($scope, $http){
 	$http.get("/resources/members/loggedIn")
 	.then( function(data) {
 		$http.get("/resources/members/"+data.data.id)
@@ -44,5 +44,5 @@ app.controller('AppCtrl2', function($scope, $http) {
 		$scope.sujet = data.data;
 		console.log(data.data);
 	});
-});*/
+});
 
