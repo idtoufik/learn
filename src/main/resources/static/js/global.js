@@ -34,6 +34,22 @@ app.controller('user', function($scope, $http){
 			console.log(data.data);
 		});
 	});
+	$scope.saveModMember = function() {
+		var m = {
+				pseudo: $scope.member.pseudo,
+				name: $scope.member.name,
+				firstName: $scope.member.firstName,
+				date_of_birth: $scope.member.date_of_birth,
+				e_mail: $scope.member.e_mail,
+		}
+		console.log($scope.member)
+		$http.put("/resources/members/"+$scope.member.id, m)
+		.then( function(){
+			console.log("avec success");
+			$window.location.href = '/services/profil.html';
+			//$scope.$apply(function() { $location.path("/services/profil.html"); });
+		})
+	}
 	
 });
 
@@ -45,4 +61,5 @@ app.controller('AppCtrl2', function($scope, $http) {
 		console.log(data.data);
 	});
 });
+
 
