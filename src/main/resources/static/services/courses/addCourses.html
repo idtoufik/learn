@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+	<title>Add courses</title>
+	<link rel="stylesheet" href="../../style/style.css">
+	<script src="../../style/jquery-3.1.1.js"></script>
+	<link rel="stylesheet" href="../../style/bootstrap/css/bootstrap.min.css">
+	<script src="../../style/bootstrap/js/bootstrap.min.js"></script>
+	<script src="../../style/angular.min.js"></script>
+	<script src="../../resources/ckeditor/ckeditor.js"></script>
+
+</head>
+<body ng-app="app" ng-controller="AppCtrl">
+    
+   
+   <div nav-bar page="about" member="member"></div>
+   <script src="../../js/global.js"></script>
+
+	<div class="container">
+		
+		<h1>HTML Editor</h1>
+
+		<form>
+			<div class="form-group">
+				<label for="Subject">Subject</label> <input type="email"
+					class="form-control" id="Subject" placeholder="Subject">
+			</div>
+
+			<div class="form-group">
+				<label for="exampleInputFile">Image input</label> 
+				<input type="file" id="cover"  accept="image/*" >
+				<p class="help-block">image pour la couverture .</p>
+			</div>
+
+			<textarea name="editor1" id="decription" rows="10" cols="10">
+				this is my text area
+			</textarea>
+			<script type="text/javascript">
+				CKEDITOR.replace('editor1');
+			</script>	
+			<br/>
+			
+			<button type="submit" class="btn btn-default">Save</button>
+		</form>
+
+
+		<hr>	
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Your Website 2017</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 
-var app = angular.module('app', []);
+//var app = angular.module('app2', []);
 
-app.controller('AppCtrl', function($http) {
+app.controller('AppCtrl2', function($http) {
 	var app = this;
 	$http.get("/resources/courses")
 	.then( function(data) {

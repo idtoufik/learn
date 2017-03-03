@@ -7,19 +7,15 @@
     <script src="style/jquery-3.1.1.js"></script>
     <link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
     <script src="style/bootstrap/js/bootstrap.min.js"></script>
+    <script src="style/angular.min.js"></script>
 
   </head>
 <!-------------------------------------->
-  <body>
-    <script>
-    $(function(){
-      $("#navbar").load("navbar.html", function(){
-        $("#contactsus").addClass("active");
-      });
-    });
-    </script>
-    <div id="navbar" class="container" ></div>
-
+  <body ng-app="app" ng-controller="AppCtrl">
+    
+   <script src="js/global.js"></script>
+   <div nav-bar page="contactus" member="member"></div>
+    
     <div class="container">
         <h1 class="page-header">Contact <small>Subheading</small></h1>
 
