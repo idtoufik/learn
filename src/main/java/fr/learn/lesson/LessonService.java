@@ -26,9 +26,18 @@ public class LessonService {
     /**
      * @param Lesson lesson
      */
-    public void addLesson(Lesson lesson) {
+    public boolean addLesson(Lesson lesson) {
     	lesson.setId(null);
-        lessonRepository.save(lesson);
+		try
+		{
+			lessonRepository.save(lesson);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+        
     }
 
     /**
@@ -41,8 +50,16 @@ public class LessonService {
     /**
      * @param Lesson lesson
      */
-    public void updateLesson(Lesson lesson) {
-        lessonRepository.save(lesson);
+    public boolean updateLesson(Lesson lesson) {
+    	try
+		{
+			lessonRepository.save(lesson);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
     }
 
     /**

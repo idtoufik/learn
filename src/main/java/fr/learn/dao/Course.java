@@ -12,6 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -52,7 +54,8 @@ public class Course {
 		this.id = id;
 	}
 
-
+	@NotNull
+	@Pattern(regexp=".{4,}")
 	public String getSubject() {
 		return subject;
 	}
@@ -62,7 +65,8 @@ public class Course {
 		this.subject = subject;
 	}
 
-
+	@NotNull
+	@Pattern(regexp=".{4,}")
 	public String getDescription() {
 		return description;
 	}

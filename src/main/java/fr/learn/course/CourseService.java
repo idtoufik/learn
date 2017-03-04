@@ -24,17 +24,33 @@ public class CourseService {
 		 return courseRepository.findOne(id);
 	}
 	
-	public void addCourse(Course course){
+	public boolean addCourse(Course course){
 		course.setId(null);
-		courseRepository.save(course);
+		try
+		{
+			courseRepository.save(course);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
 	}
 	
 	public void deleteCourse(long id){
 		courseRepository.delete(id);
 	}
 	
-	public void modifyCourse(Course course){
-		courseRepository.save(course);
+	public boolean modifyCourse(Course course){
+		try
+		{
+			courseRepository.save(course);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
 	}
 	
 }

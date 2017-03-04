@@ -2,6 +2,7 @@ package fr.learn.dao;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,8 +12,11 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Email;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -53,20 +57,27 @@ public class Member {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	//@Pattern(regexp="[A-Za-z][A-Za-z1-9]{3,}")
-	//@NotNull
+	
+	@NotNull
+	@Pattern(regexp="[A-Za-z][A-Za-z1-9]{3,}")
+	@Column(unique=true)
 	public String getPseudo() {
 		return pseudo;
 	}
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
+	
+	@NotNull
+	@Pattern(regexp="[A-Za-z]{2,}")
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	@NotNull
+	@Pattern(regexp="[A-Za-z]{2,}")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -79,6 +90,8 @@ public class Member {
 	public void setDate_of_birth(Date date_of_birth) {
 		this.date_of_birth = date_of_birth;
 	}
+	@Column(unique=true)
+	@Email
 	public String getE_mail() {
 		return e_mail;
 	}

@@ -29,10 +29,19 @@ public class MemberService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	
-	public void register(Member member)
+	public boolean register(Member member)
 	{
 		member.setPassword(bCryptPasswordEncoder.encode(member.getPassword()));
-		memberRepository.save(member);
+		try
+		{
+			memberRepository.save(member);
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		
+		return true;
 	}
 	
 	public Member findByPseudo(String pseudo)
@@ -58,12 +67,22 @@ public class MemberService {
 		 return memberRepository.findOne(memberId);
 	 }
 	 
-	 public void updateMember(Member member)
-	 {
-		 memberRepository.save(member);
+	 public boolean updateMember(Member member)
+	 { 
+		 try
+			{
+				memberRepository.save(member);
+			}
+			catch(Exception e)
+			{
+				return false;
+			}
+			
+			return true;
 	 }
 
 	public Member findOne(long idMember) {
+		
 		return memberRepository.findOne(idMember);
 	}
 	 
@@ -77,6 +96,13 @@ public class MemberService {
 	    {
 	    	return null;
 	    }
+	}
+
+	public void changePasswordForMember(Member loggedIn, String newPassword) {
+		//TODO test if i have to change the useDetals model
+		loggedIn.setPassword(bCryptPasswordEncoder.encode(newPassword));
+		memberRepository.save(loggedIn);
+		
 	}
 	 
 	 

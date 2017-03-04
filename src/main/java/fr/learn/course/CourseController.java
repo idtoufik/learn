@@ -53,8 +53,8 @@ public class CourseController {
 			return false;
 		course.setMember(loggedIn);
 		course.setDateOfCreation(new Date());
-		courseService.addCourse(course);
-		return true;
+		return courseService.addCourse(course);
+		
 	}
 	
 	@RequestMapping(value="/resources/courses/{idCourse}", method = RequestMethod.PUT)
@@ -72,8 +72,7 @@ public class CourseController {
 			course.setId(id);
 			course.setDateOfCreation(oldCourse.getDateOfCreation());
 			course.setMember(loggedIn);
-			courseService.modifyCourse(course);
-			return true;
+			return courseService.modifyCourse(course);
 		}
 		
 		return false;

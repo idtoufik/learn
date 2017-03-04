@@ -78,8 +78,7 @@ public class LessonController {
 		{
 			lesson.setCourse(course);
 			lesson.setDateOfCreation(new Date());
-			lessonService.addLesson(lesson);
-			return true;
+			return lessonService.addLesson(lesson);
 		}
 		
 		return false;
@@ -123,8 +122,7 @@ public class LessonController {
 			lesson.setId(idLesson);
 			lesson.setCourse(oldLesson.getCourse());
 			lesson.setDateOfCreation(oldLesson.getDateOfCreation());
-			lessonService.updateLesson(lesson);
-			return true;
+			return lessonService.updateLesson(lesson);
 		}
 		return false;
 		

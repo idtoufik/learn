@@ -66,8 +66,7 @@ public class ExerciseController {
 		if(lesson.getCourse().getMember().getId().equals(loggedIn.getId()))
 		{
 			exercise.setLesson(lesson);
-			exerciseService.addExercise(exercise);
-			return true;
+			return exerciseService.addExercise(exercise);
 		}
 		return false;
 	}
@@ -89,8 +88,7 @@ public class ExerciseController {
 		{
 			exercise.setId(idExercise);
 			exercise.setLesson(oldExercise.getLesson());
-			exerciseService.updateExercise(exercise);
-			return true;
+			return exerciseService.updateExercise(exercise);
 		}
 		
 		return false;

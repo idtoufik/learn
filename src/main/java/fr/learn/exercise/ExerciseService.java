@@ -26,16 +26,33 @@ public class ExerciseService {
 		return exerciseRepository.findOne(exerciseId);
 	}
 	
-	public void addExercise(Exercise exercise)
+	public boolean addExercise(Exercise exercise)
 	{
 		exercise.setId(null);
-		exerciseRepository.save(exercise);
+		try
+		{
+			exerciseRepository.save(exercise);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
+		
 		
 	}
 	
-	public void updateExercise(Exercise exercise)
+	public boolean updateExercise(Exercise exercise)
 	{
-		exerciseRepository.save(exercise);
+		try
+		{
+			exerciseRepository.save(exercise);
+			return true;
+		}
+		catch(Exception e)
+		{
+			return false;
+		}
 	}
 	
 	public void deleteExercise(Long exerciseId)

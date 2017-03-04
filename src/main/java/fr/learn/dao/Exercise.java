@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -36,12 +38,18 @@ public class Exercise {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	@NotNull
+	@Pattern(regexp=".{4,}")
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	@NotNull
+	@Pattern(regexp=".{4,}")
 	public String getSubject() {
 		return subject;
 	}
