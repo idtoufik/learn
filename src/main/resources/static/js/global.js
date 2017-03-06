@@ -10,7 +10,7 @@ app.directive('navBar', function($http) {
 			$http.get("/resources/members/loggedIn")
 			.then( function(data) {
 				scope.member = data.data;
-				console.log(data);
+				//console.log(data.data);
 			})
 			scope.member = ""
 			scope.isUndefined = function(){
@@ -61,5 +61,7 @@ app.controller('AppCtrl2', function($scope, $http) {
 		console.log(data.data);
 	});
 });
+
+
 
 
