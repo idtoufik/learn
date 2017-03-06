@@ -5,6 +5,8 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.learn.dao.Member;
@@ -132,8 +135,27 @@ public class MemberController {
 		return true;
 	}
 	
+	@RequestMapping(value="/resources/members/pseudo/validate")
+	public ResponseEntity<String> pseudoExists(@RequestParam("pseudo") String pseudo)
+	{
+		if(pseudo == null)
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		if(memberService.findByPseudo(pseudo) == null)
+			return new ResponseEntity<>("", HttpStatus.OK);
+		return new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+
+	}
 	
-	
+	@RequestMapping(value="/resources/members/email/validate")
+	public ResponseEntity<String> mailExists( @RequestParam("email") String email)
+	{
+		
+		if(email == null)
+			return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		if(memberService.findByEmail(email) == null)
+			return new ResponseEntity<>("", HttpStatus.OK);
+		return new ResponseEntity<String>("",HttpStatus.NOT_FOUND);
+	}
 	
 	
 	

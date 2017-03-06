@@ -39,7 +39,7 @@ public class Member {
 	private String firstName;
 	private Date date_of_birth;
 	private Date dateOfRegistration;
-	private String e_mail;
+	private String email;
 	private String password;
 	private Set<Role> roles;
 	private Set<Course> courses;
@@ -90,13 +90,14 @@ public class Member {
 	public void setDate_of_birth(Date date_of_birth) {
 		this.date_of_birth = date_of_birth;
 	}
+	@NotNull
 	@Column(unique=true)
 	@Email
-	public String getE_mail() {
-		return e_mail;
+	public String getEmail() {
+		return email;
 	}
-	public void setE_mail(String e_mail) {
-		this.e_mail = e_mail;
+	public void setEmail(String e_mail) {
+		this.email = e_mail;
 	}
 	@JsonProperty(access=Access.WRITE_ONLY)
 	public String getPassword() {

@@ -44,18 +44,22 @@
 				</div>
 
 				<div class="form-group control-group">
-					<input type="text" class="login-field" value=""
+					<input type="text" class="login-field" value="" name="pseudo"
 						placeholder="pseudo" id="pseudo" ng-model="member.pseudo"
-						data-error="[A-Za-z][A-Za-z1-9]{3,}"
-						pattern="[A-Za-z][A-Za-z1-9]{3,}"> <label
+						pattern="[A-Za-z][A-Za-z1-9]{3,}"
+						data-remote="/resources/members/pseudo/validate"
+						data-pattern-error="[A-Za-z][A-Za-z1-9]{3,}"
+						data-remote-error="remote error"
+						> <label
 						class="login-field-icon fui-user" for="login-name"></label>
 					<div class="help-block with-errors"></div>
 				</div>
 
 				<div class="form-group control-group">
-					<input type="email" class="login-field" value=""
+					<input type="email" class="login-field" value="" name="email"
 						placeholder="mail@mail.com" id="email" ng-model="member.e_mail"
-						data-error="erreur"> <label
+						data-remote-error="erreur remote"
+						data-remote="/resources/members/email/validate"> <label
 						class="login-field-icon fui-user" for="email"></label>
 					<div class="help-block with-errors"></div>
 				</div>
