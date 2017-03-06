@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Register Form</title>
-<link rel="stylesheet" href="style/style2.css">
 
-<script src="style/jquery-3.1.1.js"></script>
-<link rel="stylesheet" href="style/bootstrap/css/bootstrap.min.css">
-<script src="style/bootstrap/js/bootstrap.min.js"></script>
-<script src="style/angular.min.js"></script>
-<script src="js/global.js"></script>
-<script src="style/validator.min.js"></script>
+<link rel="stylesheet" href="/style/style2.css">
+<script src="/style/jquery-3.1.1.js"></script>
+<link rel="stylesheet" href="/style/bootstrap/css/bootstrap.min.css">
+<script src="/style/bootstrap/js/bootstrap.min.js"></script>
+<script src="/style/angular.min.js"></script>
+<script src="/js/global.js"></script>
+<script src="/style/validator.min.js"></script>
 
 </head>
 
@@ -57,7 +57,7 @@
 
 				<div class="form-group control-group">
 					<input type="email" class="login-field" value="" name="email"
-						placeholder="mail@mail.com" id="email" ng-model="member.e_mail"
+						placeholder="mail@mail.com" id="email" ng-model="member.email"
 						data-remote-error="erreur remote"
 						data-remote="/resources/members/email/validate"> <label
 						class="login-field-icon fui-user" for="email"></label>
@@ -95,14 +95,14 @@
 			</form>
 			<script type="text/javascript">
 				var app = angular.module('App', []);
-				app.controller("registerCtrl", function($scope, $http) {
+				app.controller("registerCtrl", function($scope, $http,$location) {
 					$scope.member = {}
 
 					$scope.clicked = function() {
 						if ($scope.register.$valid) {
 							$http.post("/resources/members", $scope.member)
 									.then(function() {
-										window.location = "/login"
+										window.location = "/login.html"
 									})
 						}
 					}
