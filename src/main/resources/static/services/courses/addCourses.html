@@ -2,50 +2,96 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>Add courses</title>
-	<link rel="stylesheet" href="../../style/style.css">
-	<script src="../../style/jquery-3.1.1.js"></script>
-	<link rel="stylesheet" href="../../style/bootstrap/css/bootstrap.min.css">
-	<script src="../../style/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../../style/angular.min.js"></script>
-	<script src="../../resources/ckeditor/ckeditor.js"></script>
+<title>Add courses</title>
+<link rel="stylesheet" href="/../../style/style.css">
+<script src="/../../style/jquery-3.1.1.js"></script>
+<link rel="stylesheet"
+	href="/../../style/bootstrap/css/bootstrap.min.css">
+<script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
+<script src="/../../style/angular.min.js"></script>
+<script src="/../../resources/ckeditor/ckeditor.js"></script>
+<script src="/../../js/global.js"></script>
 
 </head>
-<body ng-app="app" ng-controller="AppCtrl">
-    
-   
-   <div nav-bar page="about" member="member"></div>
-   <script src="../../js/global.js"></script>
+<body ng-app="app">
+
+
+	<div nav-bar page="about" member="member"></div>
+
 
 	<div class="container">
-		
-		<h1>HTML Editor</h1>
 
-		<form>
-			<div class="form-group">
-				<label for="Subject">Subject</label> <input type="email"
-					class="form-control" id="Subject" placeholder="Subject">
+		<h1>Contenu du cours</h1>
+
+		<form ng-controller="addCourses">
+			<div class="form-group" >
+				<label for="Subject">Subject</label> <input type="text"
+					class="form-control" id="Subject" placeholder="Subject" ng-model="course.subject">
 			</div>
 
 			<div class="form-group">
-				<label for="exampleInputFile">Image input</label> 
-				<input type="file" id="cover"  accept="image/*" >
+				<label for="exampleInputFile">Image input</label> <input type="file"
+					id="cover" accept="image/*" >
 				<p class="help-block">image pour la couverture .</p>
 			</div>
 
-			<textarea name="editor1" id="decription" rows="10" cols="10">
+			<textarea name="editor1" id="decription" rows="10" cols="10" >
 				this is my text area
 			</textarea>
 			<script type="text/javascript">
 				CKEDITOR.replace('editor1');
-			</script>	
-			<br/>
-			
-			<button type="submit" class="btn btn-default">Save</button>
+			</script>
+			<br />
+
+			<input type="submit" class="btn btn-default" value="Save" ng-click="addcours()" />
 		</form>
+		<script type="text/javascript">
+			app.controller("addCourses", function($scope, $http) {
+				$scope.course = {};
 
+				$scope.addcours = function() {
+					var data = CKEDITOR.instances.decription.getData();
+					$scope.course.description = "salut toufiik"//data
+					// --- pour convertir une image ne base64 ---------
+					file = new FileReader();
+					//$scope.course.image = "";
+					
+					/*if( document.getElementById('cover').files[0] ){
+						file.addEventListener("load", function(e) {
+							img_b64 = e.target.result
+							$scope.course.image = img_b64;
+							console.log( $scope.course.image )
+							$http.post("/resources/courses", $scope.course)
+							.then(function() {
+								window.location = "/services/profil.html";
+								console.log("ajouter avec succes");
+							});
+							
+						});
+						file.readAsDataURL(document.getElementById('cover').files[0]);
+					}else{
+						$http.post("/resources/courses", $scope.course)
+						.then(function() {
+							window.location = "/services/profil.html";
+							console.log("ajouter avec succes");
+						});
+					}*/
+					
+					$http.post("/resources/courses", {"subject":$scope.course.subject, "description":$scope.course.description})
+					.then(function(data) {
+						//window.location = "/services/profil.html";
+						console.log("ajouter avec succes -->", data.data);
+					});
+					// ---------------------------------------
+					
+					console.log($scope.course)
+					window.course = $scope.course
+				}
+				
+			});
+		</script>
 
-		<hr>	
+		<hr>
 		<!-- Footer -->
 		<footer>
 			<div class="row">

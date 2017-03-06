@@ -57,7 +57,7 @@
 
 				<div class="form-group control-group">
 					<input type="email" class="login-field" value="" name="email"
-						placeholder="mail@mail.com" id="email" ng-model="member.e_mail"
+						placeholder="mail@mail.com" id="email" ng-model="member.email"
 						data-remote-error="erreur remote"
 						data-remote="/resources/members/email/validate"> <label
 						class="login-field-icon fui-user" for="email"></label>
@@ -102,7 +102,7 @@
 						if ($scope.register.$valid) {
 							$http.post("/resources/members", $scope.member)
 									.then(function() {
-										window.location = "/login"
+										window.location = "/login.html"
 									})
 						}
 					}
