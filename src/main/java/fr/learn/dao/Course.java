@@ -66,7 +66,7 @@ public class Course {
 	}
 
 	@NotNull
-	@Pattern(regexp=".{4,}")
+	//@Pattern(regexp=".{4,}")
 	public String getDescription() {
 		return description;
 	}

@@ -51,7 +51,7 @@
 
 				$scope.addcours = function() {
 					var data = CKEDITOR.instances.decription.getData();
-					$scope.course.description = "salut toufiik"//data
+					$scope.course.description = data.toString();
 					// --- pour convertir une image ne base64 ---------
 					file = new FileReader();
 					//$scope.course.image = "";
@@ -77,7 +77,7 @@
 						});
 					}*/
 					
-					$http.post("/resources/courses", {"subject":$scope.course.subject, "description":$scope.course.description})
+					$http.post("/resources/courses", $scope.course)
 					.then(function(data) {
 						//window.location = "/services/profil.html";
 						console.log("ajouter avec succes -->", data.data);
