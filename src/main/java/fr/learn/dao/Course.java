@@ -35,7 +35,7 @@ public class Course {
 	private Member member;
 	private Set<Lesson> lessons;
 	private Date dateOfCreation;
-	private byte[] image;
+	private String image;
 	//private String b64img;
 	
 	
@@ -103,12 +103,12 @@ public class Course {
 	}
 	
 	@Column(length = 20971520)
-	public byte[] getImage() {
+	public String getImage() {
 		return image;
 	}
 	
 	
-	public void setImage(byte[] image) {
+	public void setImage(String image) {
 		this.image = image;
 	}
 

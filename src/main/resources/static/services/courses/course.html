@@ -2,31 +2,53 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>Add courses</title>
-	<link rel="stylesheet" href="../../style/style.css">
-	<script src="../../style/jquery-3.1.1.js"></script>
-	<link rel="stylesheet" href="../../style/bootstrap/css/bootstrap.min.css">
-	<script src="../../style/bootstrap/js/bootstrap.min.js"></script>
-	<script src="../../style/angular.min.js"></script>
-	<script src="../../resources/ckeditor/ckeditor.js"></script>
-
+<title>Add courses</title>
+<link rel="stylesheet" href="/../../style/style.css">
+<script src="/../../style/jquery-3.1.1.js"></script>
+<link rel="stylesheet"
+	href="/../../style/bootstrap/css/bootstrap.min.css">
+<script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
+<script src="/../../style/angular.min.js"></script>
+<script src="/../../js/global.js"></script>
 </head>
-<body ng-app="courses">
-    
-   
-   <div nav-bar page="about" member="member"></div>
-   <script src="../../js/global.js"></script>
+<body ng-app="app">
+
+
+	<div nav-bar page="about"></div>
+	<br>
+
 
 	<div class="container">
-	
-	
+
+
 		<div ng-controller="cours">
-			<h3>{{cours}}</h3>
-		
+			<img src="{{cours.image}}" style="height: 200px;"
+				class="img-thumbnail" />
+			<h4>{{cours.subject}}</h4>
+			<div>{{cours.description}}</div>
+
+
+			<!-- listes des lessons -->
+			<h5>liste of lesssons :</h5>
+
+			<div class="list-group" ng-repeat="lesson in cours.lessons">
+				<a href="/services/lessons/lesson.html/#!/?id={{lesson.id}}" class="list-group-item">{{lesson.title}}</a> 
+			</div>
+
 		</div>
-	
-	
-		<hr>	
+		<script type="text/javascript">
+			app.controller("cours", function($scope, $http, $location) {
+				id = $location.search().id
+				console.log(id)
+				$http.get("/resources/courses/" + id).then(function(data) {
+					$scope.cours = data.data;
+					console.log(data.data.lessons)
+				});
+			});
+		</script>
+
+
+		<hr>
 		<!-- Footer -->
 		<footer>
 			<div class="row">
