@@ -2,31 +2,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-	<title>Add courses</title>
-	<link rel="stylesheet" href="/../../style/style.css">
-	<script src="/../../style/jquery-3.1.1.js"></script>
-	<link rel="stylesheet" href="/../../style/bootstrap/css/bootstrap.min.css">
-	<script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
-	<script src="/../../style/angular.min.js"></script>
-	<script src="/../../resources/ckeditor/ckeditor.js"></script>
+<title>Add courses</title>
+<link rel="stylesheet" href="/../../style/style.css">
+<script src="/../../style/jquery-3.1.1.js"></script>
+<link rel="stylesheet"
+	href="/../../style/bootstrap/css/bootstrap.min.css">
+<script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
+<script src="/../../style/angular.min.js"></script>
+<script src="/../../resources/ckeditor/ckeditor.js"></script>
 
 </head>
 <body ng-app="app">
-    
-   
-   <div nav-bar page="about" member="member"></div>
-   <script src="/../../js/global.js"></script>
+
+
+	<div nav-bar page="about" member="member"></div>
+	<script src="/../../js/global.js"></script>
 
 	<div class="container">
-	
-	
+
+
 		<div ng-controller="lessons">
-			<h3>Lessons</h3>
-		
+			<h4>{{lesson.title}}</h4>
+			<div>{{lesson.content}}</div>
+			
+			
+			<!-- listes des lessons -->
+			<h5>liste of exercises :</h5>
+
+			<div class="list-group" ng-repeat="exo in lesson.exercises">
+				<a href="/services/lessons/lesson.html/#!/?idcours={{cours.id}}&&idlesson={{lesson.id}}&&idExo={{exo.id}}" class="list-group-item">{{exo.title}}</a> 
+			</div>
+
 		</div>
-	
-	
-		<hr>	
+		<script type="text/javascript">
+		
+			app.controller("lessons", function($scope, $http, $location) {
+				idC = $location.search().idcours
+				idL = $location.search().idlesson
+
+				$http.get("/resources/courses/"+idC+"/lessons/" + idL).then(function(data) {
+					$scope.lesson = data.data;
+				});
+			});
+		</script>
+
+		<hr>
 		<!-- Footer -->
 		<footer>
 			<div class="row">

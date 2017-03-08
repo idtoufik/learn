@@ -21,18 +21,12 @@
 
 	<div class="container">
 
-		<h1>Contenu du cours</h1>
+		<h1>Content of lesson</h1>
 
-		<form ng-controller="addCourses">
+		<form ng-controller="addLesson">
 			<div class="form-group" >
 				<label for="Subject">Subject</label> <input type="text"
-					class="form-control" id="Subject" placeholder="Subject" ng-model="course.subject">
-			</div>
-
-			<div class="form-group">
-				<label for="exampleInputFile">Image input</label> <input type="file"
-					id="cover" accept="image/*" >
-				<p class="help-block">image pour la couverture .</p>
+					class="form-control" id="Subject" placeholder="Subject" ng-model="lesson.title">
 			</div>
 
 			<textarea name="editor1" id="decription" rows="10" cols="10" >
@@ -46,46 +40,19 @@
 			<input type="submit" class="btn btn-default" value="Save" ng-click="addcours()" />
 		</form>
 		<script type="text/javascript">
-			app.controller("addCourses", function($scope, $http) {
-				$scope.course = {};
+			app.controller("addLesson", function($scope, $http, $location) {
+				$scope.lesson = {};
+				idC = $location.search().idcours
 
 				$scope.addcours = function() {
 					var data = CKEDITOR.instances.decription.getData();
-					$scope.course.description = data.toString();
-					// --- pour convertir une image ne base64 ---------
-					file = new FileReader();
-					//$scope.course.image = "";
-					
-					/*if( document.getElementById('cover').files[0] ){
-						file.addEventListener("load", function(e) {
-							img_b64 = e.target.result
-							$scope.course.image = img_b64;
-							console.log( $scope.course.image )
-							$http.post("/resources/courses", $scope.course)
-							.then(function() {
-								window.location = "/services/profil.html";
-								console.log("ajouter avec succes");
-							});
-							
-						});
-						file.readAsDataURL(document.getElementById('cover').files[0]);
-					}else{
-						$http.post("/resources/courses", $scope.course)
-						.then(function() {
-							window.location = "/services/profil.html";
-							console.log("ajouter avec succes");
-						});
-					}*/
-					
-					$http.post("/resources/courses", $scope.course)
+					$scope.lesson.content = data.toString();
+					console.log($scope.lesson)
+					$http.post("/resources/courses/"+idC+"/lessons", $scope.lesson)
 					.then(function(data) {
 						//window.location = "/services/profil.html";
 						console.log("ajouter avec succes -->", data.data);
 					});
-					// ---------------------------------------
-					
-					console.log($scope.course)
-					window.course = $scope.course
 				}
 				
 			});

@@ -53,7 +53,7 @@ public class Lesson {
 	}
 	
 	@NotNull
-	@Pattern(regexp=".{4,}")
+	//@Pattern(regexp=".{4,}")
 	public String getContent() {
 		return content;
 	}
