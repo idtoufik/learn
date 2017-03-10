@@ -49,7 +49,7 @@ public class Exercise {
 	}
 	
 	@NotNull
-	@Pattern(regexp=".{4,}")
+	//@Pattern(regexp=".{4,}")
 	public String getSubject() {
 		return subject;
 	}

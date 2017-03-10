@@ -15,7 +15,7 @@
 <body ng-app="app">
 
 
-	<div nav-bar page="about" member="member"></div>
+	<div nav-bar ></div>
 	<script src="/../../js/global.js"></script>
 
 	<div class="container">
@@ -30,17 +30,20 @@
 			<h5>liste of exercises :</h5>
 
 			<div class="list-group" ng-repeat="exo in lesson.exercises">
-				<a href="/services/lessons/lesson.html/#!/?idcours={{cours.id}}&&idlesson={{lesson.id}}&&idExo={{exo.id}}" class="list-group-item">{{exo.title}}</a> 
+				<a href="/services/exercices/exercise.html/#!/?idcours={{coursId}}&&idlesson={{lesson.id}}&&idExo={{exo.id}}" class="list-group-item">{{exo.title}}</a> 
 			</div>
+			
+			<p><a href="/services/exercices/addExercise.html/#!/?idcours={{coursId}}&&idlesson={{lesson.id}}">Add new exercice</a></p>
 
 		</div>
 		<script type="text/javascript">
 		
 			app.controller("lessons", function($scope, $http, $location) {
-				idC = $location.search().idcours
+				$scope.coursId = $location.search().idcours
+				//idC = $location.search().idcours
 				idL = $location.search().idlesson
 
-				$http.get("/resources/courses/"+idC+"/lessons/" + idL).then(function(data) {
+				$http.get("/resources/courses/"+ $scope.coursId +"/lessons/" + idL).then(function(data) {
 					$scope.lesson = data.data;
 				});
 			});
