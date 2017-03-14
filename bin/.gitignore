@@ -1,2 +1,6 @@
+/.DS_Store
+/application.properties
 /fr/
 /static/
+/templates/
+/tmp/
