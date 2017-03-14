@@ -65,12 +65,12 @@
 	<script src="../style/angular.min.js"></script>
   </head>
 <!-------------------------------------->
-  <body ng-app="app" ng-controller="AppCtrl">
+  <body ng-app="app">
     
    <script src="../js/global.js"></script>
-   <div nav-bar page="labs" member="member"></div>
+   <div nav-bar page="labs"></div>
 
-    <div class="container">
+    <div class="container" ng-controller="compile">
       <div class="row">
         <h1 class="page-header">VLab :
             <small>C++ Compiler</small>
@@ -136,19 +136,76 @@
               <textarea id="code" name="code" >// your code here</textarea>
               <br>
 
-              <input type="submit" value="Download code">
-              <input type="submit" value="Exec">
+              <button ng-click="donwloadCode()">Download code</button>
+				<input type="submit" value="Executer" ng-click="executer()" />
 
           </form>
-
+			
         </div>
         <br>
         <div class="row" >
-            <textarea readonly class="result">Result</textarea>
+            <textarea readonly class="result">{{getCode}}</textarea>
         </div>
 
         <hr>
+		<script>
 
+			app.controller("compile", function($scope, $http) {
+				//$scope.script = {}
+				$scope.executer = function() {
+					code = editor.getValue()
+					$http({
+						url :"/resources/compileCpp",
+						method: 'POST',
+						headers:{
+							'Content-Type': 'text/html'
+						},
+						data: code,
+						transformResponse:[function(data){
+							return data
+						}]
+					}).then(function(data) {
+						$scope.getCode = data.data;
+						console.log(data)
+					});
+					
+
+				}
+
+				$scope.donwloadCode = function() {
+					var codeText = editor.getValue()
+					var textFileAsBlob = new Blob([ codeText ], {
+						type : 'text/x-xsrc'
+					});
+					var fileNameToSaveAs = "code.cpp";
+					console.log("blob here -->",textFileAsBlob)
+
+					var downloadLink = document.createElement("a");
+					downloadLink.download = fileNameToSaveAs;
+					downloadLink.innerHTML = "Download File";
+					if (window.webkitURL != null) {
+						// Chrome allows the link to be clicked without actually adding it to the DOM.
+						downloadLink.href = window.webkitURL
+								.createObjectURL(textFileAsBlob);
+					} else {
+						// Firefox requires the link to be added to the DOM before it can be clicked.
+						downloadLink.href = window.URL
+								.createObjectURL(textFileAsBlob);
+						downloadLink.onclick = destroyClickedElement;
+						downloadLink.style.display = "none";
+						document.body.appendChild(downloadLink);
+					}
+
+					downloadLink.click();
+				}
+
+				function destroyClickedElement(event) {
+					// remove the link from the DOM
+					document.body.removeChild(event.target);
+				}
+
+			});
+		</script>
         <!-- Footer -->
         <footer>
             <div class="row">

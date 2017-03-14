@@ -28,14 +28,14 @@ public class Compilation {
 			BufferedReader error = getError(p1);
 			String ligne = null;
 
-			log+="\n......\n";
+			//log+="\n......\n";
 			boolean erreur=false;
 			while ((ligne = error.readLine()) != null) {
 				log+=ligne;
 				erreur=true;
 				log+="\n";
 			}
-			if(erreur==false) log+="Compilation successful !!!";
+			if(erreur==false) log+="successful";
 
 			p1.waitFor();
 		} catch (IOException e) {
