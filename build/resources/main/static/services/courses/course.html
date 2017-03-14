@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Add courses</title>
+<link rel="stylesheet" href="/../../style/style.css">
+<script src="/../../style/jquery-3.1.1.js"></script>
+<link rel="stylesheet"
+	href="/../../style/bootstrap/css/bootstrap.min.css">
+<script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
+<script src="/../../style/angular.min.js"></script>
+<script src="/../../js/global.js"></script>
+</head>
+<body ng-app="app">
+
+
+	<div nav-bar page="about"></div>
+	<br>
+
+
+	<div class="container">
+
+
+		<div ng-controller="cours">
+			<img src="{{cours.image}}" style="height: 200px;"
+				class="img-thumbnail" />
+			<h4>{{cours.subject}}</h4>
+			<div>{{cours.description}}</div>
+
+
+			<!-- listes des lessons -->
+			<h5>liste of lesssons :</h5>
+
+			<div class="list-group" ng-repeat="lesson in cours.lessons">
+				<a href="/services/lessons/lesson.html/#!/?idcours={{cours.id}}&&idlesson={{lesson.id}}" class="list-group-item">{{lesson.title}}</a> 
+			</div>
+			<p><a href="/services/lessons/addLesson.html/#!/?idcours={{cours.id}}">Add new lesson</a></p>
+		</div>
+		<script type="text/javascript">
+			app.controller("cours", function($scope, $http, $location) {
+				idcours = $location.search().id
+				$http.get("/resources/courses/" + idcours).then(function(data) {
+					$scope.cours = data.data;
+				});
+			});
+		</script>
+
+
+		<hr>
+		<!-- Footer -->
+		<footer>
+			<div class="row">
+				<div class="col-lg-12">
+					<p>Copyright &copy; Your Website 2017</p>
+				</div>
+			</div>
+		</footer>
+	</div>
+</body>
+</html>

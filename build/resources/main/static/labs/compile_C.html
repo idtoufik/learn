@@ -62,18 +62,16 @@
     <script src="../resources/CodeMirror-master/CodeMirror-master/addon/selection/active-line.js"></script>
     <script src="../resources/CodeMirror-master/CodeMirror-master/addon/edit/matchbrackets.js"></script>
 
-
+	<script src="../style/angular.min.js"></script>
+	<script src="../js/global.js"></script>
   </head>
 <!-------------------------------------->
-  <body>
-    <script>
-    $(function(){
-      $("#navbar").load("lab_navbar.html", function(){
-        $("#communaute").addClass("active");
-      });
-    });
-    </script>
-    <div id="navbar" class="container" ></div>
+  <body ng-app="app">
+    
+   
+   <div ng-controller="AppCtrl">
+   		<div nav-bar page="labs" member="member"></div>
+   </div>
 
 
     <div class="container">
