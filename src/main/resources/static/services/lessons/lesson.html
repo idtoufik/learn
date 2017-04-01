@@ -16,6 +16,7 @@
 
 
 	<div nav-bar ></div>
+	<script src = "/../../js/sanitize.js"></script>
 	<script src="/../../js/global.js"></script>
 
 	<div class="container">
@@ -23,17 +24,17 @@
 
 		<div ng-controller="lessons">
 			<h4>{{lesson.title}}</h4>
-			<div>{{lesson.content}}</div>
+			<div  ng-bind-html = "lesson.content"></div>
 			
 			
 			<!-- listes des lessons -->
 			<h5>liste of exercises :</h5>
 
 			<div class="list-group" ng-repeat="exo in lesson.exercises">
-				<a href="/services/exercices/exercise.html/#!/?idcours={{coursId}}&&idlesson={{lesson.id}}&&idExo={{exo.id}}" class="list-group-item">{{exo.title}}</a> 
+				<a href="/services/exercises/exercise.html/#!/?idcours={{coursId}}&&idlesson={{lesson.id}}&&idExo={{exo.id}}" class="list-group-item">{{exo.title}}</a> 
 			</div>
 			
-			<p><a href="/services/exercices/addExercise.html/#!/?idcours={{coursId}}&&idlesson={{lesson.id}}">Add new exercice</a></p>
+            <p><a href="/services/exercises/addExercise.html/#!/?idcours={{coursId}}&&idlesson={{lesson.id}}"><button class="btn btn-primary center-block">Ajouter un exercice</button></a></p>
 
 		</div>
 		<script type="text/javascript">
@@ -41,7 +42,7 @@
 			app.controller("lessons", function($scope, $http, $location) {
 				$scope.coursId = $location.search().idcours
 				//idC = $location.search().idcours
-				idL = $location.search().idlesson
+				idL = $location.search().idLesson
 
 				$http.get("/resources/courses/"+ $scope.coursId +"/lessons/" + idL).then(function(data) {
 					$scope.lesson = data.data;

@@ -23,6 +23,7 @@ public class Exercise {
 	private Long id;
 	private String title;
 	private String subject;
+	private String language;
 	private Lesson lesson;
 	
 	
@@ -55,6 +56,16 @@ public class Exercise {
 	}
 	public void setSubject(String subject) {
 		this.subject = subject;
+	}
+	
+	
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 	@ManyToOne

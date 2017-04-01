@@ -15,6 +15,7 @@
     
    
    <div nav-bar ></div>
+    <script src = "/../../js/sanitize.js"></script>
    <script src="/../../js/global.js"></script>
 
 	<div class="container">
@@ -22,7 +23,7 @@
 	
 		<div ng-controller="exercise">
 			<h4>{{exercice.title}}</h4>
-			<div>{{exercice.subject}}</div>
+			<div ng-bind-html="exercice.subject"></div>
 			
 		</div>
 		
@@ -34,7 +35,7 @@
 				idL = $location.search().idlesson
 				idE = $location.search().idExo
 
-				$http.get("/resources/courses/"+idC+"/lessons/"+idL+"/exercises/"+ idE).then(function(data) {
+				$http.get("/resources/courses/1/lessons/"+idL+"/exercises/"+ idE).then(function(data) {
 					$scope.exercice = data.data;
 				});
 			});

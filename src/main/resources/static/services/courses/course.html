@@ -9,6 +9,7 @@
 	href="/../../style/bootstrap/css/bootstrap.min.css">
 <script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
 <script src="/../../style/angular.min.js"></script>
+    <script src = "/../../js/sanitize.js"></script>
 <script src="/../../js/global.js"></script>
 </head>
 <body ng-app="app">
@@ -25,7 +26,7 @@
 			<img src="{{cours.image}}" style="height: 200px;"
 				class="img-thumbnail" />
 			<h4>{{cours.subject}}</h4>
-			<div>{{cours.description}}</div>
+			<div class= "well">{{cours.description}}</div>
 
 
 			<!-- listes des lessons -->
@@ -34,11 +35,19 @@
 			<div class="list-group" ng-repeat="lesson in cours.lessons">
 				<a href="/services/lessons/lesson.html/#!/?idcours={{cours.id}}&&idlesson={{lesson.id}}" class="list-group-item">{{lesson.title}}</a> 
 			</div>
-			<p><a href="/services/lessons/addLesson.html/#!/?idcours={{cours.id}}">Add new lesson</a></p>
+			<p>
+				<button class="btn btn-primary center-block" ng-click='addLesson()'>
+					Add new lesson
+				</button>
+			</p>
 		</div>
 		<script type="text/javascript">
 			app.controller("cours", function($scope, $http, $location) {
 				idcours = $location.search().id
+				$scope.addLesson = function()
+				{
+					window.location = "/services/lessons/addLesson.html/#!/?idcours="+idcours
+				}
 				$http.get("/resources/courses/" + idcours).then(function(data) {
 					$scope.cours = data.data;
 				});

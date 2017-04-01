@@ -10,6 +10,7 @@
 <script src="/../../style/bootstrap/js/bootstrap.min.js"></script>
 <script src="/../../style/angular.min.js"></script>
 <script src="/../../resources/ckeditor/ckeditor.js"></script>
+<script src = "/../../js/sanitize.js"></script>
 <script src="/../../js/global.js"></script>
 <script src="/style/validator.min.js"></script>
 
@@ -103,7 +104,7 @@
 				
 				$scope.redirection = function(){
 					if(done)
-						window.location = "/"
+						window.location = "/services/courses/course.html/#!/?id="+idC
 				}
 				
 				
