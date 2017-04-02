@@ -114,6 +114,11 @@ public class MemberController {
 		Member loggedIn = memberService.getMemberFromAuthentification(auth);
 		if(loggedIn != null)
 			loggedIn.setCourses(null);
+		else
+		{
+			loggedIn = new Member();
+			loggedIn.setPseudo("__notLogged__");
+		}
 		
 		return loggedIn;
 	}

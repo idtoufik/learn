@@ -33,13 +33,12 @@
 			<div >
 				
 				<br>
-				<p>Id : {{member.id}}</p>
 				<p>Pseudo : {{member.pseudo}}</p>
 				<p>Name : {{member.name}}</p>
 				<p>First name : {{member.firstName}}</p>
-				<p>E-mail : {{member.e_mail}}</p>
-				<p>Date of birth : {{member.date_of_birth}}</p>
-				<p>Date of registration : {{member.dateOfRegistration}}</p>
+				<p>E-mail : {{member.email}}</p>
+				<p>Date of birth : {{member.date_of_birth | date : 'dd/MM/yyyy'}}</p>
+				<p>Date of registration : {{member.dateOfRegistration | date : 'medium'}}  </p>
 				<h3>Liste des cours</h3>
 
 				<div class="row">
@@ -54,7 +53,7 @@
 								<h4>{{c.subject}}</h4>
 								<p>{{c.description}}</p>
 
-								<a href="/services/courses/course.html/#!/?id={{c.id}}" class="btn btn-primary">Learn More</a>
+								<a href="/services/courses/course.html/#!/?idCourse={{c.id}}" class="btn btn-primary">Learn More</a>
                                 
 							</div>
                             <div>
@@ -74,7 +73,7 @@
 			<p> first name : <input type="text" class="login-field" value=" {{member.firstName}} " id="firstName" ng-model="member.firstName"> </p><br>
 			<p> name : <input type="text" class="login-field" value="{{member.name}}"  id="name" ng-model="member.name"></p> <br>
 			<p> pseudo : <input type="text" class="login-field" value="{{member.pseudo}}"  id="pseudo" ng-model="member.pseudo"> </p> <br>
-			<p> e-mail : <input type="email" class="login-field" value="{{member.e_mail}}"  id="email" ng-model="member.e_mail"> </p><br>
+			<p> e-mail : <input type="email" class="login-field" value="{{member.email}}"  id="email" ng-model="member.e_mail"> </p><br>
 			<p> date of birth : <input type="date" class="login-field" value="{{member.date_of_birth}}" id="dateBirth" ng-model="member.date_of_birth"></p>
 			<input  type="submit" vlaue="Register" ng-click="saveModMember()"/>
 		</div>

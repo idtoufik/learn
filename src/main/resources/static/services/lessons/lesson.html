@@ -23,29 +23,76 @@
 
 
 		<div ng-controller="lessons">
-			<h4>{{lesson.title}}</h4>
-			<div  ng-bind-html = "lesson.content"></div>
-			
+			<h3>{{lesson.title}}</h3>
+			<div  ng-bind-html = "lesson.content" class="border-top-0"></div>
+			<hr/>
 			
 			<!-- listes des lessons -->
-			<h5>liste of exercises :</h5>
+			<h4>liste des Exercises :</h4>
 
-			<div class="list-group" ng-repeat="exo in lesson.exercises">
+			<!--<div class="list-group" ng-repeat="exo in lesson.exercises">
 				<a href="/services/exercises/exercise.html/#!/?idcours={{coursId}}&&idlesson={{lesson.id}}&&idExo={{exo.id}}" class="list-group-item">{{exo.title}}</a> 
-			</div>
+			</div>-->
+            
+            <table class="table">
+                <thead>
+                  <tr class = "row">
+                    <th class="col-xs-10 col-md-10 col-sd-10">Exercice</th>
+                    <th class="col-xs-2 col-md-2  col-sd-2" ng-show="itIsHisLesson">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="exo in lesson.exercises"  class ="row"> 
+                        <td class="col-xs-10 col-md-10 col-sd-10">
+                            <a href="/services/exercises/exercise.html/#!/?idLesson={{lesson.id}}&&idExo={{exo.id}}">
+                                {{exo.title}}
+                            </a>
+                        </td> 
+                        <td class="col-xs-2 col-md-2 col-sd-2" ng-show="itIsHisLesson">
+                            <a href="/services/exercises/modExercise.html/#!/?idLesson={{lesson.id}}&&idExo={{exo.id}}">
+                                <i class="glyphicon glyphicon-pencil smallbtn "></i>
+                            </a>
+                            <i class="glyphicon glyphicon-trash smallbtn" ng-click="deleteExo(exo.id)"></i>
+                        </td> 
+                    </tr>
+                </tbody>
+            </table>
+            
+            
 			
-            <p><a href="/services/exercises/addExercise.html/#!/?idcours={{coursId}}&&idlesson={{lesson.id}}"><button class="btn btn-primary center-block">Ajouter un exercice</button></a></p>
+            <p><a href="/services/exercises/addExercise.html/#!/?idCours={{coursId}}&&idLesson={{lesson.id}}"><button class="btn btn-primary center-block">Ajouter un exercice</button></a></p>
 
 		</div>
 		<script type="text/javascript">
 		
 			app.controller("lessons", function($scope, $http, $location) {
-				$scope.coursId = $location.search().idcours
+				$scope.coursId = $location.search().idCourse
+                $scope.itIsHisLesson = false;
 				//idC = $location.search().idcours
 				idL = $location.search().idLesson
+                if(idL == undefined)
+                    {
+                        window.location = "/"
+                    }
+                
+                $scope.deleteExo = function(idExo){
+                    $http.delete("/resources/courses/1/lessons/1/exercises/" + idExo)
+                    .then(function(){
+                        console.log("exo supprimé")
+                        location.reload();
+                    })
+                }
 
-				$http.get("/resources/courses/"+ $scope.coursId +"/lessons/" + idL).then(function(data) {
+				$http.get("/resources/courses/1/lessons/" + idL).then(function(data) {
 					$scope.lesson = data.data;
+                    $http.get("/resources/members/loggedIn")
+                    .then(function(result){
+                        if(result.data.id == $scope.lesson.course.member.id)
+                            {
+                                
+                                $scope.itIsHisLesson = true;
+                            }
+                    });
 				});
 			});
 		</script>

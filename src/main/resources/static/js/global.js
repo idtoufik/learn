@@ -10,11 +10,15 @@ app.directive('navBar', function($http) {
 			$http.get("/resources/members/loggedIn")
 			.then( function(data) {
 				scope.member = data.data;
-				//console.log(data.data);
+				console.log(data.data);
+                scope.isLogged = (data.data.id != null)
+                
 			})
-			scope.member = ""
+			scope.member = {}
+            scope.isLogged = false;
 			scope.isUndefined = function(){
-				return (typeof scope.member.id === "undefined")
+                console.log("is undefined yes it is")
+				return  true//scope.member.id === "null"
 			}
 		}
 
@@ -24,6 +28,10 @@ app.directive('navBar', function($http) {
 app.controller("controller", function($scope){
 	
 });
+
+app.controller("AppCtrl", function($scope){
+    
+})
 
 
 

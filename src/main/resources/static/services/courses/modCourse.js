@@ -1,6 +1,6 @@
 app.controller("addCourses", function($scope, $http, $location) {
 				$scope.course = {};
-                idC = $location.search().idCourse;
+                var idC = $location.search().idCourse;
                 if(idC == undefined)
                     {
                         window.location = "/"
@@ -42,7 +42,7 @@ app.controller("addCourses", function($scope, $http, $location) {
 							img_b64 = e.target.result
 							$scope.course.image = img_b64;
 							console.log( $scope.course.image )
-							$http.post("/resources/courses", $scope.course)
+							$http.put("/resources/courses/"+idC, $scope.course)
 							.then(function() {
 								window.location = "/services/profil.html";
 							});
@@ -50,7 +50,7 @@ app.controller("addCourses", function($scope, $http, $location) {
 						});
 						file.readAsDataURL(document.getElementById('cover').files[0]);
 					}else{
-						$http.post("/resources/courses", $scope.course)
+						$http.put("/resources/courses/"+idC, $scope.course)
 						.then(function() {
 							window.location = "/services/profil.html";
 							//console.log("ajouter avec succes");
@@ -63,8 +63,23 @@ app.controller("addCourses", function($scope, $http, $location) {
                     .then(function(result){
                     $scope.course.image = result.data.image;
                     $scope.course.subject = result.data.subject;
-                    $scope.couse.description = result.data.description;
+                    $scope.course.description = result.data.description;
                 })
                 
+                $scope.dialog = {
+						
+						"title" : "confirmation",
+						"content" : "la lesson a bien ete ajoutée",
+						"ok" : {
+							"title" : "confirmation",
+							"content" : "la lesson a bien ete ajoutée"
+						},
+					
+						"error" : {
+							"title" : "erreur",
+							"content" : "la Lesson n'a pa pu etre ajouté, le champ titre doit contenir au moins 4 caracteres"
+					
+						}
+				}
 				
 			});
