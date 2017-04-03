@@ -25,3 +25,9 @@ footer {
     color: black;
 }
 
+.contenant
+{
+    border: 1px solid #aca8a8;
+    border-radius: 10px;
+}
+

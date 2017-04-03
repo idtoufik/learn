@@ -29,7 +29,7 @@
 				<div class="form-group control-group">
 					<input type="text" class="login-field" value=""
 						placeholder="Prénom" id="firstName" ng-model="member.firstName"
-						data-error="le nom doit au moins contenir 2 caractaires"
+						data-error="le prenom doit au moins contenir 2 caractaires"
 						pattern="[A-Za-z]{2,}" required> <label
 						class="login-field-icon fui-user " for="login-name"></label>
 					<div class="help-block with-errors"></div>
@@ -49,9 +49,10 @@
 						placeholder="pseudo" id="pseudo" ng-model="member.pseudo"
 						pattern="[A-Za-z][A-Za-z1-9]{3,}"
 						data-remote="/resources/members/pseudo/validate"
-						data-pattern-error="[A-Za-z][A-Za-z1-9]{3,}"
-						data-remote-error="remote error"
-						> <label
+						data-pattern-error="un pseudo doit commancer par une lettre ,
+                                            et doit contenir au moins 4 caractaires alpha numeiques"
+						data-remote-error="ce pseudo existe deja"
+						 required> <label
 						class="login-field-icon fui-user" for="login-name"></label>
 					<div class="help-block with-errors"></div>
 				</div>
@@ -59,8 +60,9 @@
 				<div class="form-group control-group">
 					<input type="email" class="login-field" value="" name="email"
 						placeholder="mail@mail.com" id="email" ng-model="member.email"
-						data-remote-error="erreur remote"
-						data-remote="/resources/members/email/validate"> <label
+						data-remote-error="cette adresse mail existe deja"
+                        data-pattern-error = "veuillez inserez une adresse mail valide !"
+						data-remote="/resources/members/email/validate" required> <label
 						class="login-field-icon fui-user" for="email"></label>
 					<div class="help-block with-errors"></div>
 				</div>
@@ -68,7 +70,7 @@
 				<div class="form-group control-group">
 					<input type="password" class="login-field" value=""
 						placeholder="password" id="login-pass" ng-model="member.password"
-						data-error="[A-Za-z][A-Za-z1-9]{3,}" data-minlength="6"> <label
+						data-error="le mot de passe doit contenir au moins 6 caractaires" data-minlength="6" required> <label
 						class="login-field-icon fui-lock" for="login-pass"></label>
 					<div class="help-block with-errors"></div>
 				</div>
@@ -76,15 +78,17 @@
 				<div class="form-group control-group">
 					<input type="password" class="login-field" value=""
 						placeholder="Confirm password" id="login-pass2"
-						data-match="#login-pass" data-match-error="don't match"> <label
-						class="login-field-icon fui-user" for="login-pass2"></label>
+						data-match="#login-pass" data-match-error="les deux mot de passe sont differents"
+                           required> 
+                    <label class="login-field-icon fui-user" for="login-pass2" >
+                    </label>
 					<div class="help-block with-errors"></div>
 				</div>
 
 				<div class="form-group control-group">
 					<input type="date" class="login-field" value=""
 						placeholder="Date of birth : yyyy-mm-jj" id="dateBirth"
-						ng-model="member.date_of_birth"> <label
+						ng-model="member.date_of_birth" required> <label
 						class="login-field-icon fui-user" for="dateBirth"></label>
 				</div>
 
@@ -100,7 +104,7 @@
 					$scope.member = {}
 
 					$scope.clicked = function() {
-						if ($scope.register.$valid) {
+						if ($scope.register.$valid && $("#login-pass").val() == $("#login-pass2").val()) {
 							$http.post("/resources/members", $scope.member)
 									.then(function() {
 										window.location = "/login.html"

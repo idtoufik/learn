@@ -70,12 +70,34 @@
 		</div>
 		
 		<div class="div2" style="display: none;" >
-			<p> first name : <input type="text" class="login-field" value=" {{member.firstName}} " id="firstName" ng-model="member.firstName"> </p><br>
-			<p> name : <input type="text" class="login-field" value="{{member.name}}"  id="name" ng-model="member.name"></p> <br>
-			<p> pseudo : <input type="text" class="login-field" value="{{member.pseudo}}"  id="pseudo" ng-model="member.pseudo"> </p> <br>
-			<p> e-mail : <input type="email" class="login-field" value="{{member.email}}"  id="email" ng-model="member.e_mail"> </p><br>
-			<p> date of birth : <input type="date" class="login-field" value="{{member.date_of_birth}}" id="dateBirth" ng-model="member.date_of_birth"></p>
-			<input  type="submit" vlaue="Register" ng-click="saveModMember()"/>
+            
+			<p class = " form-group"> 
+                <lable for="pseudo">Pseudo</lable>  
+                <input type="text" class="login-field form-control" value="{{member.pseudo}}"  id="pseudo" ng-model="member.pseudo"
+                       pattern="[A-Za-z][A-Za-z1-9]{3,}" required> 
+            </p> 
+			<p class = " form-group"> 
+                <lable for = "name">Nom</lable> 
+                <input type="text" class="login-field form-control" value="{{member.name}}"  id="name" ng-model="member.name" 
+                       pattern="[A-Za-z]{2,}" required
+                       >
+            </p> 
+			
+            <p class = "form-group"> 
+                <label for = "firstName">Prenom  </label>
+                <input type="text" class="login-field form-control" value=" {{member.firstName}} " id="firstName" ng-model="member.firstName" pattern="[A-Za-z]{2,}" required> 
+            </p>
+			<p class = " form-group"> 
+                <lable for="email">e-mail</lable>  
+                <input type="email" class="login-field form-control" value="{{member.email}}"  id="email" ng-model="member.email"> 
+            </p>
+			<p class = " form-group">
+                <lable for="dateBirth">Date of birth</lable>  
+                <input type="date" class="login-field form-control" value="{{member.date_of_birth}}" id="dateBirth" ng-model="member.date_of_birth" required>
+            </p>
+            <button class="btn btn-primary center-block "   ng-click="saveModMember()">
+                Enregister les modifications
+            </button>
 		</div>
 
 
@@ -85,7 +107,7 @@
 		<footer>
 			<div class="row">
 				<div class="col-lg-12">
-					<p>Copyright &copy; Your Website 2017</p>
+					<p>Copyright &copy; Learn 2017</p>
 				</div>
 			</div>
 		</footer>

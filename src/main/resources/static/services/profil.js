@@ -13,13 +13,14 @@ app.controller('user', function($scope, $http){
 				name: $scope.member.name,
 				firstName: $scope.member.firstName,
 				date_of_birth: $scope.member.date_of_birth,
-				e_mail: $scope.member.e_mail,
+				email: $scope.member.email,
+                dateOfRegistration : $scope.member.dateOfRegistration
 		}
-		console.log($scope.member)
+		console.log(m)
 		$http.put("/resources/members/"+$scope.member.id, m)
 		.then( function(){
 			console.log("avec success");
-			$window.location.href = '/services/profil.html';
+			window.location = '/services/profil.html';
 			//$scope.$apply(function() { $location.path("/services/profil.html"); });
 		})
 	}
